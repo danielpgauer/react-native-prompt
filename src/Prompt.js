@@ -81,6 +81,13 @@ export default class Prompt extends Component {
     this.props.onCancel();
   };
 
+  setValue(value) {
+    if (this.textInput) {
+      this.textInput.setNativeProps({text: value});
+    }
+    this.setState({ value });
+  }
+
   close = () => {
     this.setState({visible: false});
   };
@@ -114,6 +121,7 @@ export default class Prompt extends Component {
           </View>
           <View style={styles.dialogBody}>
             <TextInput
+              ref={textInput => this.textInput = textInput}
               style={[styles.dialogInput, inputStyle]}
               defaultValue={defaultValue}
               onChangeText={this._onChangeText}
